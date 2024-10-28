@@ -21,12 +21,11 @@ sealed class BarbershopTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-      backgroundColor: ColorsConstants.brow,
-      foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8)
-      )
-      )
-    )
+        backgroundColor: ColorsConstants.brow,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+    ),
+    fontFamily: FontConstants.fontFamily
   );
 }
