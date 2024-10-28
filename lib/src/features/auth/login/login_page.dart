@@ -74,7 +74,10 @@ class LoginPage extends StatelessWidget {
                             onPressed: () {},
                             child: const Text('Acesar'),
                           ),
-                          const Align(
+                          
+                        ],
+                      ),
+                      const Align(
                             alignment: Alignment.bottomCenter,
                             child: Text(
                               'Criar conta',
@@ -85,8 +88,6 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                           )
-                        ],
-                      ),
                     ],
                   ),
                 ),
