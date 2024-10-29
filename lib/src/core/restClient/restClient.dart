@@ -1,9 +1,8 @@
-import 'package:barbershop/src/core/restClient/interceptors/auth_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 
 final class RestClient extends DioForNative {
-  late final AuthInterceptor _authInterceptor;
+  
   RestClient()
       : super(BaseOptions(
           baseUrl: 'http://192.168.3.62:8081',
@@ -26,13 +25,5 @@ final class RestClient extends DioForNative {
     options.extra['DIO_AUTH_KEY'];
     return this;
   }
-  //  RestClient auth() {
-  //   interceptors.add(_authInterceptor);
-  //   return this;
-  // }
-
-  // RestClient unuauth() {
-  //   interceptors.remove(_authInterceptor);
-  //   return this;
-  // }
+  
 }
