@@ -42,7 +42,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  FutureOr<Either<RepositoryException, UserModel>> me() async {
+  Future<Either<RepositoryException, UserModel>>me() async {
     try {
       final Response(:data) = await restClient.auth.get('/me');
       return Success(UserModel.fromMap(data));

@@ -39,8 +39,11 @@ final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
           Messages.ShowError('Erro ao realizar login.', context);
 
         case LoginState(status:LoginStateStatus.admLogin):
+        Navigator.of(context).pushNamedAndRemoveUntil('/home/adm', (route) => false);
+        break;
         case LoginState(status:LoginStateStatus.employeeLogin):
-         
+          Navigator.of(context).pushNamedAndRemoveUntil('/home/employee', (route) => false);
+        break;
          }
         });
 
