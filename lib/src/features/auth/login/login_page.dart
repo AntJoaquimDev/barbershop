@@ -28,24 +28,34 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
- ref.listen(loginVmProvider, (_, state) { 
-         switch(state){
-          case LoginState(status:LoginStateStatus.initial):
+    
+    final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
+    ref.listen(loginVmProvider, (_, state) {
+      switch (state) {
+        case LoginState(status: LoginStateStatus.initial):
+     
           break;
-          case LoginState(status:LoginStateStatus.error,:final errorMessage?):
-          Messages.ShowError(errorMessage, context);
-           case LoginState(status:LoginStateStatus.error):
-          Messages.ShowError('Erro ao realizar login.', context);
-
-        case LoginState(status:LoginStateStatus.admLogin):
-        Navigator.of(context).pushNamedAndRemoveUntil('/home/adm', (route) => false);
-        break;
-        case LoginState(status:LoginStateStatus.employeeLogin):
-          Navigator.of(context).pushNamedAndRemoveUntil('/home/employee', (route) => false);
-        break;
-         }
-        });
+        case LoginState(status: LoginStateStatus.error, :final errorMessage?):
+    
+          Messages.showError(errorMessage, context);
+        case LoginState(status: LoginStateStatus.error):
+      
+          Messages.showError('Erro ao realizar login.', context);
+          
+        case LoginState(status: LoginStateStatus.admLogin):
+       
+          
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/home/adm', (route) => false);
+          break;
+        case LoginState(status: LoginStateStatus.employeeLogin):
+       
+        
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/home/employee', (route) => false);
+          break;
+      }
+    });
 
     return Scaffold(
         backgroundColor: Colors.black,
@@ -114,27 +124,29 @@ final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
                             ),
                             Align(
                                 alignment: Alignment.centerLeft,
-                                child: TextButton(
-                                    onPressed: () {},
-                                    child: const Text(
-                                      'Esqueceu a senha?',
-                                      style: TextStyle(
-                                        color: ColorsConstants.brow,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16,
-                                      ),
-                                    ))),
+                                child: InkWell(
+                                  onTap: (){Navigator.of(context).pushNamed('/auth/register/user');},
+                                  child: const Text(
+                                    'Esqueceu a senha?',
+                                    style: TextStyle(
+                                      color: ColorsConstants.brow,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                )),
                             const SizedBox(height: 24),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   minimumSize: const Size.fromHeight(56)),
                               onPressed: () {
-                                switch(formKey.currentState?.validate()){
+                                switch (formKey.currentState?.validate()) {
                                   case (false || null):
-                                  Messages.ShowError('Campos inválidos', context);
-                                  break;
+                                    Messages.showError(
+                                        'Campos inválidos', context);
+                                    break;
                                   case true:
-                                  login(emailEC.text,passwordEC.text);
+                                    login(emailEC.text, passwordEC.text);
                                 }
                               },
                               child: const Text('Acesar'),

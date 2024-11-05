@@ -3,7 +3,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 sealed class Messages {
- static void ShowError(String message,BuildContext context) {
+ static void showError(String message,BuildContext context) {
     showTopSnackBar(
       Overlay.of(context),
       CustomSnackBar.error(
@@ -12,7 +12,7 @@ sealed class Messages {
     );
   }
 
-  static void ShowInfor(String message,BuildContext context) {
+  static void showInfor(String message,BuildContext context) {
     showTopSnackBar(
       Overlay.of(context),
       CustomSnackBar.info(
@@ -21,7 +21,7 @@ sealed class Messages {
     );
   }
 
-  static void ShowSucces(String message,BuildContext context) {
+  static void showSucces(String message,BuildContext context) {
     showTopSnackBar(
       Overlay.of(context),
       CustomSnackBar.success(

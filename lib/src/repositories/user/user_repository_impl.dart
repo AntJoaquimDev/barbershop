@@ -42,7 +42,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<RepositoryException, UserModel>>me() async {
+  Future<Either<RepositoryException, UserModel>> me() async {
     try {
       final Response(:data) = await restClient.auth.get('/me');
       return Success(UserModel.fromMap(data));
@@ -50,9 +50,9 @@ class UserRepositoryImpl implements UserRepository {
       log('Erro ao realizar login', error: e, stackTrace: s);
       return Failure(
           RepositoryException(message: 'Erro ao buscar usuario logado'));
-    }on ArgumentError catch(e,s){
-       log('Json Invalíde', error: e, stackTrace: s);
-       return Failure(RepositoryException(message: e.message));
+    } on ArgumentError catch (e, s) {
+      log('Json Invalíde', error: e, stackTrace: s);
+      return Failure(RepositoryException(message: e.message));
     }
   }
 }

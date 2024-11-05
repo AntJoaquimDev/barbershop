@@ -1,9 +1,8 @@
-import 'dart:convert';
+
 
 class BarbershopModel {
   final int id;
   final String name;
-
   final String email;
   List<String> openingDays;
   List<int> openingHours;
