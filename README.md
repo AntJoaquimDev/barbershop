@@ -1,6 +1,6 @@
-# barbershop
-
-A new Flutter project.
+# Barbershop
+Projeto de estudos na ACdemia do Flutter. DartWeek
+A new Flutter project. 3.10 and Dart 3 e Riverpode new gerencia de state.
 
 ## Getting Started
 
