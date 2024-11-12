@@ -1,16 +1,20 @@
+import 'package:barbershop/src/core/providers/apllications_providers.dart';
 import 'package:barbershop/src/core/ui/helpers/form_helper.dart';
+import 'package:barbershop/src/core/ui/helpers/messages.dart';
 import 'package:barbershop/src/core/ui/widgets/barbershop_button.dart';
+import 'package:barbershop/src/features/auth/register/user_register_vm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:validatorless/validatorless.dart';
 
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends ConsumerState<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final _nameEC = TextEditingController();
   final _emailEC = TextEditingController();
@@ -26,6 +30,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userRegisterVm = ref.watch(userRegisterVmProvider.notifier);
+    ref.listen(userRegisterVmProvider, (_, state) {
+      switch (state) {
+        case UserRegisterStateStatus.initial:
+        case UserRegisterStateStatus.success:
+        case UserRegisterStateStatus.error:
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Criar conta'),
@@ -89,15 +102,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 30,
                 ),
                 TextFormField(
+                  onTapOutside: (_) => unfocus(context),
                   obscureText: true,
-                  decoration:
-                      const InputDecoration(
-                        label: Text('Confirmar Senha'),
+                  decoration: const InputDecoration(
+                    label: Text('Confirmar Senha'),
                     hintText: 'Senha',
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelStyle: TextStyle(color: Colors.black),
-                    helperStyle: TextStyle(color: Colors.black),),
-                      
+                    helperStyle: TextStyle(color: Colors.black),
+                  ),
                   validator: Validatorless.multiple([
                     Validatorless.required('Confirmar a Senha obrigatório.'),
                     Validatorless.compare(_passwordEC, 'Senhas diferente')
@@ -110,11 +123,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: double.infinity,
                     label: 'Registrar',
                     onPressed: () {
-                      final valid = _formKey.currentState?.validate() ?? false;
-                      if (valid) {
-                        _nameEC.text;
-                        _emailEC.text;
-                        _passwordEC.text;
+                      switch (_formKey.currentState?.validate()) {
+                        case null || false:
+                          Messages.showError('Formulário inválido', context);
+                        case true:
+                          userRegisterVm.register(
+                            name: _nameEC.text,
+                            email: _emailEC.text,
+                            password: _passwordEC.text,
+                          );
                       }
                     },
                   ),

@@ -4,14 +4,17 @@ import 'package:barbershop/src/core/exceptions/service_exception.dart';
 import 'package:barbershop/src/core/fp/either.dart';
 import 'package:barbershop/src/core/fp/nil.dart';
 import 'package:barbershop/src/repositories/user/user_repository.dart';
+import 'package:barbershop/src/services/user_login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import './user_login_service.dart';
+import 'user_login_service.dart';
 
 class UserLoginServiceImpl implements UserLoginService {
   final UserRepository userRepository;
+  final UserLoginService loginService;
   UserLoginServiceImpl({
     required this.userRepository,
+    required this.loginService,
   });
   @override
   Future<Either<ServiceException, Nil>> execute(
