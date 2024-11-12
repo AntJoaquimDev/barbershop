@@ -19,15 +19,17 @@ class UserLoginServiceImpl implements UserLoginService {
   Future<Either<ServiceException, Nil>> execute(
       String email, String password) async {
     final loginResult = await userRepository.login(email, password);
+    //!aqui usamos o conceito de Pattern Matching
     switch (loginResult) {
       case Success(value: final accessToken):
         final sp = await SharedPreferences.getInstance();
         sp.setString(LocalStorageKeys.accessToken, accessToken);
-        
+       
         return Success(nil);
+        
       case Failure(:final exception):
         return switch (exception) {
-          AuthError() =>
+         AuthError() =>
             Failure(ServiceException(message: 'Erro ao realizar login')),
           AuthUnauthorizedException() =>
             Failure(ServiceException(message: 'Login ou senha inváldos')),

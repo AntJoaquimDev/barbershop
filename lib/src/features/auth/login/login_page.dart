@@ -32,12 +32,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
     ref.listen(loginVmProvider, (_, state) {
       switch (state) {
-        case LoginState(status: LoginStateStatus.initial):
-     
+        case LoginState(status: LoginStateStatus.initial):     
           break;
+
         case LoginState(status: LoginStateStatus.error, :final errorMessage?):
     
           Messages.showError(errorMessage, context);
+          
         case LoginState(status: LoginStateStatus.error):
       
           Messages.showError('Erro ao realizar login.', context);
@@ -147,6 +148,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                     break;
                                   case true:
                                     login(emailEC.text, passwordEC.text);
+                                    Messages.showSucces('seu login é valido.', context);
                                 }
                               },
                               child: const Text('Acesar'),

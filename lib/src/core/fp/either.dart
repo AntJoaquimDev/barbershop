@@ -12,3 +12,4 @@ class Failure<E extends Exception,S>extends Either<E,S> {
   }
 
 
+//! Principio da Porgamação funcional

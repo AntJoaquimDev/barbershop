@@ -8,10 +8,6 @@ abstract class UserRepository {
   Future<Either<AuthException, String>> login(String email, String password);
   Future<Either<RepositoryException, UserModel>> me();
   Future<Either<RepositoryException, Nil>> registerAdmin(
-    ({    
-      String name,
-      String email,
-      String password,
-    }) userDTO,
+    ({String name, String email, String password}) userDTO,
   );
 }
