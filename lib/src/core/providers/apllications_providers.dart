@@ -6,8 +6,8 @@ import 'package:barbershop/src/repositories/barbershop_repositoy.dart';
 import 'package:barbershop/src/repositories/barbershop_repositoy_impl.dart';
 import 'package:barbershop/src/repositories/user/user_repository.dart';
 import 'package:barbershop/src/repositories/user/user_repository_impl.dart';
-import 'package:barbershop/src/services/user_login_adm_service.dart';
-import 'package:barbershop/src/services/user_login_adm_service_impl.dart';
+import 'package:barbershop/src/services/login/user_login_service.dart';
+import 'package:barbershop/src/services/login/user_login_adm_service_impl.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
