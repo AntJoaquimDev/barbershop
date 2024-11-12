@@ -19,8 +19,7 @@ class BarnershopRepositoyImpl implements BarbershopRepositoy {
       case UserModelADM():
         final Response(data:List(first:data)) =
             await restClient.auth.get('/barbershop', queryParameters: {
-          'user_id':
-              '#userAuthRef' //no manobra pár json resst server no back normal tem q trocar
+          'user_id':'#userAuthRef' //no manobra pár json resst server no back normal tem q trocar
         });
         return Success(BarbershopModel.fromMap(data));
       case UserModelEmployee():

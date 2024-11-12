@@ -5,28 +5,28 @@ import 'package:dio/io.dart';
 final class RestClient extends DioForNative {
   RestClient()
       : super(BaseOptions(
-          baseUrl: 'http://192.168.3.62:8081',
+          baseUrl: 'http://192.168.3.62:8080',
           connectTimeout: const Duration(seconds: 10),
           receiveTimeout: const Duration(seconds: 60),
         )) {
     interceptors.addAll([
       LogInterceptor(
-        request: true,
+        //request: true,
         requestBody: true,
-        requestHeader: true,
         responseBody: true,
+       // requestHeader: true,
       ),
       AuthInterceptor(),
     ]);
   }
 
   RestClient get auth {
-    options.extra['DIO_AUTH_KEY'];
+    options.extra['DIO_AUTH_KEY']=true;
     return this;
   }
 
   RestClient get unAuth {
-    options.extra['DIO_AUTH_KEY'];
+    options.extra['DIO_AUTH_KEY']=false;
     return this;
   }
 }

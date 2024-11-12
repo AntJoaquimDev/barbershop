@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:barbershop/src/core/exceptions/auth_exception.dart';
 import 'package:barbershop/src/core/exceptions/repository_exception.dart';
 import 'package:barbershop/src/core/fp/either.dart';
+import 'package:barbershop/src/core/fp/nil.dart';
 import 'package:barbershop/src/core/restClient/restClient.dart';
 import 'package:barbershop/src/model/user_model.dart';
 import 'package:dio/dio.dart';
@@ -42,7 +43,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<RepositoryException, UserModel>>me() async {
+  Future<Either<RepositoryException, UserModel>> me() async {
     try {
       final Response(:data) = await restClient.auth.get('/me');
       return Success(UserModel.fromMap(data));
@@ -50,9 +51,25 @@ class UserRepositoryImpl implements UserRepository {
       log('Erro ao realizar login', error: e, stackTrace: s);
       return Failure(
           RepositoryException(message: 'Erro ao buscar usuario logado'));
-    }on ArgumentError catch(e,s){
-       log('Json Invalíde', error: e, stackTrace: s);
-       return Failure(RepositoryException(message: e.message));
+    } on ArgumentError catch (e, s) {
+      log('Json Invalíde', error: e, stackTrace: s);
+      return Failure(RepositoryException(message: e.message));
     }
+  }
+
+  @override
+  Future<Either<RepositoryException, Nil>> registerAdmin(({String name,String email,  String password}) userData) async{
+    try {
+  await restClient.unAuth.post('/users',data: {
+    'name':userData.name,
+    'email':userData.email,
+    'password':userData.password,
+    'profile':'ADM'
+  });
+  return Success(nil);
+} on DioException catch (e,s) {
+  log('Erro ao registrar ',error: e,stackTrace: s);
+  return Failure(RepositoryException(message: 'Erro ao registrar usuário admin'));
+}
   }
 }
