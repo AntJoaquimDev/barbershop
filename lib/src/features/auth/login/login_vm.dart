@@ -26,8 +26,8 @@ class LoginVm extends _$LoginVm {
           //buscar dados do user logado
         final userModel = await ref.read(getMeProvider.future);
 
-        switch (userModel) { 
-          //analizar qual tipo de login (ADM ou Employee)
+        switch (userModel) {  //analizar qual tipo de login (ADM ou Employee)
+         
           case UserModelADM():
             state = state.copyWith(status: LoginStateStatus.admLogin);
            

@@ -1,7 +1,6 @@
 import 'package:asyncstate/asyncstate.dart';
 import 'package:barbershop/src/core/fp/either.dart';
 import 'package:barbershop/src/core/providers/apllications_providers.dart';
-import 'package:barbershop/src/features/auth/register/register_page.dart';
 import 'package:barbershop/src/services/register/user_register_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

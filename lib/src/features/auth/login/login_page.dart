@@ -123,17 +123,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 helperStyle: TextStyle(color: Colors.black),
                               ),
                             ),
-                            Align(
+                            const Align(
                                 alignment: Alignment.centerLeft,
-                                child: InkWell(
-                                  onTap: (){Navigator.of(context).pushNamed('/auth/register/user');},
-                                  child: const Text(
-                                    'Esqueceu a senha?',
-                                    style: TextStyle(
-                                      color: ColorsConstants.brow,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                    ),
+                                child: Text(
+                                  'Esqueceu a senha?',
+                                  style: TextStyle(
+                                    color: ColorsConstants.brow,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
                                   ),
                                 )),
                             const SizedBox(height: 24),
@@ -155,14 +152,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             ),
                           ],
                         ),
-                        const Align(
+                        Align(
                           alignment: Alignment.bottomCenter,
-                          child: Text(
-                            'Criar conta',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.of(context).pushNamed('/auth/register/user');
+                              },
+                            child:const Text(
+                              'Criar conta',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         )

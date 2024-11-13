@@ -2,7 +2,7 @@ import 'package:barbershop/src/core/providers/apllications_providers.dart';
 import 'package:barbershop/src/core/ui/helpers/form_helper.dart';
 import 'package:barbershop/src/core/ui/helpers/messages.dart';
 import 'package:barbershop/src/core/ui/widgets/barbershop_button.dart';
-import 'package:barbershop/src/features/auth/register/user_register_vm.dart';
+import 'package:barbershop/src/features/auth/register/user/user_register_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:validatorless/validatorless.dart';
@@ -36,7 +36,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
         case UserRegisterStateStatus.initial:
         break;
         case UserRegisterStateStatus.success:
-        Navigator.of(context).pushNamed('/auth/register/barbershop');
+       // Navigator.of(context).pushNamed('/auth/register/barbershop');
+       Navigator.of(context).pushNamedAndRemoveUntil('/auth/register/barbershop' ,(route) => false);
         case UserRegisterStateStatus.error:
         Messages.showError('Errro ao registar user administradir', context);
       }
@@ -136,7 +137,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                               name: nameEC.text,
                               email: emailEC.text,
                               password: passwordEC.text,
+                            
                             );
+                            Messages.showSucces('Usuário Criado com sucesso.', context);
                         }
                       },
                     ),
