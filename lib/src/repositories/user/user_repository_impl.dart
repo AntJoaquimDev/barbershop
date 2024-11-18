@@ -18,7 +18,7 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({
     required this.restClient,
   });
-
+//! usando novo dart 3 , flutter 3.10 usando destrucks
   @override
   Future<Either<AuthException, String>> login(
       String email, String password) async {

@@ -32,12 +32,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
     ref.listen(loginVmProvider, (_, state) {
       switch (state) {
-        case LoginState(status: LoginStateStatus.initial):
-     
+        case LoginState(status: LoginStateStatus.initial):     
           break;
+
         case LoginState(status: LoginStateStatus.error, :final errorMessage?):
     
           Messages.showError(errorMessage, context);
+
         case LoginState(status: LoginStateStatus.error):
       
           Messages.showError('Erro ao realizar login.', context);
@@ -47,13 +48,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/home/adm', (route) => false);
-          break;
+          
         case LoginState(status: LoginStateStatus.employeeLogin):
        
         
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/home/employee', (route) => false);
-          break;
+        
       }
     });
 
@@ -122,17 +123,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 helperStyle: TextStyle(color: Colors.black),
                               ),
                             ),
-                            Align(
+                            const Align(
                                 alignment: Alignment.centerLeft,
-                                child: InkWell(
-                                  onTap: (){Navigator.of(context).pushNamed('/auth/register/user');},
-                                  child: const Text(
-                                    'Esqueceu a senha?',
-                                    style: TextStyle(
-                                      color: ColorsConstants.brow,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                    ),
+                                child: Text(
+                                  'Esqueceu a senha?',
+                                  style: TextStyle(
+                                    color: ColorsConstants.brow,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
                                   ),
                                 )),
                             const SizedBox(height: 24),
@@ -147,20 +145,26 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                     break;
                                   case true:
                                     login(emailEC.text, passwordEC.text);
+                                    Messages.showSucces('seu login é valido.', context);
                                 }
                               },
                               child: const Text('Acesar'),
                             ),
                           ],
                         ),
-                        const Align(
+                        Align(
                           alignment: Alignment.bottomCenter,
-                          child: Text(
-                            'Criar conta',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.of(context).pushNamed('/auth/register/user');
+                              },
+                            child:const Text(
+                              'Criar conta',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         )

@@ -1,21 +1,20 @@
-
 sealed class UserModel {
   final int id;
   final String name;
   final String email;
-  final String password;
+  // final String password;
   final String? avatar;
-  
+
   UserModel({
     required this.id,
     required this.name,
     required this.email,
-    required this.password,
+    // required this.password,
     this.avatar,
   });
   factory UserModel.fromMap(Map<String, dynamic> json) {
     return switch (json['profile']) {
-      'ADM' => UserModel.fromMap(json),
+      'ADM' => UserModelADM.fromMap(json),
       'EMPLOYEE' => UserModelEmployee.fromMap(json),
       _ => throw ArgumentError('User profile not found')
     };
@@ -23,20 +22,17 @@ sealed class UserModel {
 }
 
 class UserModelADM extends UserModel {
-   
-  List<String>? workDays;
-  List<String>? workHours;
+  final List<String>? workDays;
+  final List<int>? workHours;
 
-  UserModelADM(
-      {
-      required super.id,
-      required super.name,
-      required super.email,
-      required super.password,
-      super.avatar,
-      this.workDays,
-      
-      this.workHours});
+  UserModelADM({
+    required super.id,
+    required super.name,
+    required super.email,
+    super.avatar,
+    this.workDays,
+    this.workHours,
+  });
 
   factory UserModelADM.fromMap(Map<String, dynamic> json) {
     return switch (json) {
@@ -44,14 +40,13 @@ class UserModelADM extends UserModel {
         'id': final int id,
         'name': final String name,
         'email': final String email,
-        'password':final String password,
-        
+       
       } =>
         UserModelADM(
           id: id,
           name: name,
-          email: email, 
-          password: password,         
+          email: email,
+          
           avatar: json['avatar'],
           workDays: json['work_days']?.cast<String>(),
           workHours: json['work_hours']?.cast<int>(),
@@ -70,7 +65,6 @@ class UserModelEmployee extends UserModel {
     required super.id,
     required super.name,
     required super.email,
-    required super.password,
     
     required this.barberShopId,
     required this.workDays,
@@ -84,7 +78,6 @@ class UserModelEmployee extends UserModel {
         'id': final int id,
         'name': final String name,
         'email': final String email,
-        'password':final String password,
         'barbershop_id': final int barberShopId,
         'work_days': final List workDays,
         'work_hours': final List workHours,
@@ -93,7 +86,6 @@ class UserModelEmployee extends UserModel {
           id: id,
           name: name,
           email: email,
-          password: password,
           avatar: json['avatar'],
           barberShopId: barberShopId,
           workDays: workDays.cast<String>(),
