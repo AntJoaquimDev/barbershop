@@ -1,20 +1,20 @@
-import 'package:barbershop/src/core/ui/constants.dart';
 import 'package:barbershop/src/core/ui/widgets/button_day.dart';
 import 'package:flutter/material.dart';
 
 class WeekdaysPanel extends StatelessWidget {
-  const WeekdaysPanel({super.key});
+  final ValueChanged<String> onDayPressed;
+  const WeekdaysPanel({super.key, required this.onDayPressed});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Selecione os Dias da Semana',
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
         SingleChildScrollView(
@@ -22,13 +22,34 @@ class WeekdaysPanel extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ButtonDay(label: 'seg',),
-              ButtonDay(label: 'Ter',),
-              ButtonDay(label: 'Qua',),
-              ButtonDay(label: 'Qui',),
-              ButtonDay(label: 'Sex',),
-              ButtonDay(label: 'Sab',),
-              ButtonDay(label: 'Dom',),
+              ButtonDay(
+                label: 'seg',
+                onDayPressed: onDayPressed,
+              ),
+              ButtonDay(
+                label: 'Ter',
+                onDayPressed: onDayPressed,
+              ),
+              ButtonDay(
+                label: 'Qua',
+                onDayPressed: onDayPressed,
+              ),
+              ButtonDay(
+                label: 'Qui',
+                onDayPressed: onDayPressed,
+              ),
+              ButtonDay(
+                label: 'Sex',
+                onDayPressed: onDayPressed,
+              ),
+              ButtonDay(
+                label: 'Sab',
+                onDayPressed: onDayPressed,
+              ),
+              ButtonDay(
+                label: 'Dom',
+                onDayPressed: onDayPressed,
+              ),
             ],
           ),
         )
@@ -36,4 +57,3 @@ class WeekdaysPanel extends StatelessWidget {
     );
   }
 }
-

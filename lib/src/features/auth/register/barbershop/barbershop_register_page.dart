@@ -17,12 +17,12 @@ class _BarberShopRegisterPageState extends State<BarberShopRegisterPage> {
   @override
   final formKey = GlobalKey<FormState>();
   final emailEC = TextEditingController();
-  final passwordEC = TextEditingController();
+  final nameEC = TextEditingController();
 
   @override
   void dispose() {
     emailEC.dispose();
-    passwordEC.dispose();
+    nameEC.dispose();
     super.dispose();
   }
 
@@ -38,77 +38,84 @@ class _BarberShopRegisterPageState extends State<BarberShopRegisterPage> {
           slivers: [
             SliverFillRemaining(
               hasScrollBody: false,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  TextFormField(
-                    onTapOutside: (_) => unfocus(context),
-                    validator: Validatorless.multiple([
-                      Validatorless.required('Nome orbrigatorio'),
-                      Validatorless.email('Nome inválido'),
-                    ]),
-                    controller: emailEC,
-                    decoration: const InputDecoration(
-                      label: Text('Nome'),
-                      hintText: 'Nome',
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      labelStyle: TextStyle(color: Colors.black),
-                      helperStyle: TextStyle(color: Colors.black),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 5,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  TextFormField(
-                    onTapOutside: (_) => unfocus(context),
-                    validator: Validatorless.multiple([
-                      Validatorless.required('E-mail orbrigatorio'),
-                      Validatorless.email('E-mail inválido'),
-                    ]),
-                    controller: emailEC,
-                    decoration: const InputDecoration(
-                      label: Text('E-mail'),
-                      hintText: 'E-mail',
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      labelStyle: TextStyle(color: Colors.black),
-                      helperStyle: TextStyle(color: Colors.black),
+                    TextFormField(
+                      onTapOutside: (_) => unfocus(context),
+                      validator: Validatorless.multiple([
+                        Validatorless.required('Nome orbrigatorio'),
+                        Validatorless.email('Nome inválido'),
+                      ]),
+                      controller: nameEC,
+                      decoration: const InputDecoration(
+                        label: Text('Nome'),
+                        hintText: 'Nome',
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        labelStyle: TextStyle(color: Colors.black),
+                        helperStyle: TextStyle(color: Colors.black),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  const WeekdaysPanel(),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  const HoursPanel(
-                    startTime: 8,
-                    endTime: 22,
-                  ),
-                  const SizedBox(height: 24),
-                  Center(
-                    child: BarbershopButton(
-                      height: 50,
-                      width: double.infinity,
-                      label: 'Cadastrar Estabelecimento',
-                      onPressed: () {
-                        switch (formKey.currentState?.validate()) {
-                          case null || false:
-                            Messages.showError('Formulário inválido', context);
-                          case true:
-                            //userRegisterVm.register(
-                            // name: nameEC.text,
-                            // email: emailEC.text,
-                            // password: passwordEC.text,
-
-                            //);
-                            Messages.showSucces(
-                                'Usuário Criado com sucesso.', context);
-                        }
-                      },
+                    const SizedBox(
+                      height: 24,
                     ),
-                  ),
-                ],
+                    TextFormField(
+                      onTapOutside: (_) => unfocus(context),
+                      validator: Validatorless.multiple([
+                        Validatorless.required('E-mail orbrigatorio'),
+                        Validatorless.email('E-mail inválido'),
+                      ]),
+                      controller: emailEC,
+                      decoration: const InputDecoration(
+                        label: Text('E-mail'),
+                        hintText: 'E-mail',
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        labelStyle: TextStyle(color: Colors.black),
+                        helperStyle: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                     WeekdaysPanel(onDayPressed: (value){
+                      print(value);
+                    }),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                     HoursPanel(
+                      startTime: 8,
+                      endTime: 22,
+                      onHoursPressed: (value) => {}, 
+                      
+                    ),
+                    const SizedBox(height: 24),
+                    Center(
+                      child: BarbershopButton(
+                        height: 50,
+                        width: double.infinity,
+                        label: 'Cadastrar Estabelecimento',
+                        onPressed: () {
+                          switch (formKey.currentState?.validate()) {
+                            case null || false:
+                              Messages.showError('Formulário inválido', context);
+                            case true:
+                              //userRegisterVm.register(
+                              // name: nameEC.text,
+                              // email: emailEC.text,
+                              // password: passwordEC.text,
+              
+                              //);
+                              Messages.showSucces(
+                                  'Usuário Criado com sucesso.', context);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],
