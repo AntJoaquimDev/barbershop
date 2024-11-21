@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
+
 
 import 'package:barbershop/src/core/exceptions/repository_exception.dart';
 import 'package:barbershop/src/core/fp/either.dart';
@@ -22,8 +25,7 @@ class BarnershopRepositoyImpl implements BarbershopRepositoy {
       case UserModelADM():
         final Response(data: List(first: data)) =
             await restClient.auth.get('/barbershop', queryParameters: {
-          'user_id':
-              '#userAuthRef' //no manobra pár json resst server no back normal tem q trocar
+          'user_id':'#userAuthRef' //no manobra pár json resst server no back normal tem q trocar
         });
         return Success(BarbershopModel.fromMap(data));
       case UserModelEmployee():
@@ -41,20 +43,22 @@ class BarnershopRepositoyImpl implements BarbershopRepositoy {
         String name,
         List<String> openingDays,
         List<int> openingHours,
-      }) dataDTo)async {
-           try {
-  await restClient.auth.post('/barbershop',data:{
-            'user_id':'userAuthRef',
-            'name':dataDTo.name,
-            'email':dataDTo.email,
-            'opening_days':dataDTo.openingDays,
-            'opening_hours':dataDTo.openingHours,
-  
-  
-          });return Success(nil);
-} on DioException catch (e,s) {
-  log('Erro ao registar Barbearia', error: e,stackTrace: s);
-  return Failure(RepositoryException(message: 'Erro ao registar Barbearia'));
-}
-      }
+      }) dataDTo) async {
+    try {
+      await restClient.auth.post('/barbershop', data: {
+        'user_id': '#userAuthRef',
+        'name': dataDTo.name,
+        'email': dataDTo.email,
+        'opening_days': dataDTo.openingDays,
+        'opening_hours': dataDTo.openingHours,
+      });
+      return Success(nil);
+
+    } on DioException catch (e, s) {
+      
+      log('Erro ao registar Barbearia', error: e, stackTrace: s);
+      return Failure(
+          RepositoryException(message: 'Erro ao registar Barbearia'));
+    }
+  }
 }

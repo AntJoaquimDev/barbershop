@@ -28,8 +28,10 @@ class _TimeButtonState extends State<TimeButton> {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
       onTap: () {
+        setState(() {
+          selected = !selected;
         widget.onHoursPressed(widget.value);
-        selected = !selected;
+        });
       },
       child: Container(
         width: 64,
