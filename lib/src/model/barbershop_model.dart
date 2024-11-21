@@ -16,11 +16,11 @@ class BarbershopModel {
   factory BarbershopModel.fromMap(Map<String, dynamic> json) {
     return switch (json) {
       {
-        'id': int id,
-        'name': String name,
-        'email': String email,
-        'opening_days': final List openingDays,
-        'opening_hours': final List openingHours,
+        'id':final int id,
+        'name':final String name,
+        'email':final String email,
+        'opening_days':final List<String> openingDays,
+        'opening_hours':final  List<int> openingHours,
       } =>
         BarbershopModel(
           id: id,

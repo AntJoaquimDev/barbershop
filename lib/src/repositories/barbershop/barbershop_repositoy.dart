@@ -8,9 +8,10 @@ abstract interface class BarbershopRepositoy {
   Future<Either<RepositoryException, BarbershopModel>> getMyBarbersShop(
       UserModel userModel);
   Future<Either<RepositoryException, Nil>> save(
-    ({String name,
-    String email,
-    List<String> openingDays,
-    List<int> openingHours,})data
-  );
+      ({
+        String name,
+        String email,
+        List<String> openingDays,
+        List<int> openingHours,
+      }) data);
 }
