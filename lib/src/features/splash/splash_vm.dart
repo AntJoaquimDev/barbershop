@@ -11,7 +11,7 @@ enum SplashState {
   initial,
   login,
   loggedADM,
-  loggedEmploee,
+  loggedEmployee,
   erro,
 }
 
@@ -24,15 +24,14 @@ class SplashVm extends _$SplashVm {
       ref.invalidate(getMeProvider);
       ref.invalidate(getMyBarbersShopProvider);
       try {
-  final userModel = await ref.watch(getMeProvider.future);
-  return switch (userModel) {
-    UserModelADM() => SplashState.loggedADM,
-    UserModelEmployee() => SplashState.loggedEmploee,
-  };
-}  catch (e) {
-  
-  SplashState.login;
-}
+        final userModel = await ref.watch(getMeProvider.future);
+        return switch (userModel) {
+          UserModelADM() => SplashState.loggedADM,
+          UserModelEmployee() => SplashState.loggedEmployee,
+        };
+      } catch (e) {
+        SplashState.login;
+      }
     }
     return SplashState.login;
   }
